@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: yadage-atlas-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yadage-atlas-worker
+    spec:
+      containers:
+       - name: yadage-atlas-worker
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:yadage-workflow-controller
+         imagePullPolicy: Always
+         env:
+          - name: QUEUE_ENV
+            value: yadage-atlas-queue
+          - name: EXPERIMENT
+            value: atlas
+          - name: SHARED_VOLUME
+            value: "/k8s/atlas"
+         volumeMounts:
+          - name: atlas
+            mountPath: "/data"
+      volumes:
+       - name: atlas
+         cephfs:
+           monitors:
+            - 128.142.36.227:6790
+            - 128.142.39.77:6790
+            - 128.142.39.144:6790
+           path: "/k8s/atlas"
+           user: k8s
+           secretRef:
+             name: ceph-secret
+           readOnly: false
+

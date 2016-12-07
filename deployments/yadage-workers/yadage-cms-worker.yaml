@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: yadage-cms-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yadage-cms-worker
+    spec:
+      containers:
+       - name: yadage-cms-worker
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:yadage-workflow-controller
+         imagePullPolicy: Always
+         env:
+          - name: QUEUE_ENV
+            value: yadage-cms-queue
+          - name: EXPERIMENT
+            value: cms
+          - name: SHARED_VOLUME
+            value: "/k8s/cms"
+         volumeMounts:
+          - name: cms
+            mountPath: "/data"
+      volumes:
+       - name: cms
+         cephfs:
+           monitors:
+            - 128.142.36.227:6790
+            - 128.142.39.77:6790
+            - 128.142.39.144:6790
+           path: "/k8s/cms"
+           user: k8s
+           secretRef:
+             name: ceph-secret
+           readOnly: false
+

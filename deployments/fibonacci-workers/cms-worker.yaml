@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fibo-cms-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: fibo-cms-worker
+    spec:
+      containers:
+       - name: fibo-cms-worker
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:fibonacci-workflow-controller
+         imagePullPolicy: Always
+         env:
+          - name: QUEUE_ENV
+            value: "fibo-cms-queue"
+          - name: EXPERIMENT
+            value: "cms"
+          - name: SHARED_VOLUME
+            value: "/k8s/cms"
+         volumeMounts:
+          - name: cms-pv
+            mountPath: "/data"
+      securityContext:
+        fsGroup: 0
+      volumes:
+       - name: cms-pv
+         cephfs:
+           monitors:
+            - 128.142.36.227:6790
+            - 128.142.39.77:6790
+            - 128.142.39.144:6790
+           path: "/k8s/cms"
+           user: k8s
+           secretRef:
+             name: ceph-secret
+           readOnly: false

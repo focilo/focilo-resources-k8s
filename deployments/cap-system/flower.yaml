@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flower
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flower
+    spec:
+      containers:
+       - name: flower
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:flower
+         ports:
+          - containerPort: 5555 
+            name: "http"
+         env:
+          - name: CELERY_BROKER_URL
+            value: amqp://test:1234@broker-service//
+          - name: FLOWER_BROKER_API
+            value: http://test:1234@broker-service:15672/api/

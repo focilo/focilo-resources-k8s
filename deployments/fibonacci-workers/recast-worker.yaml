@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fibo-recast-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: fibo-recast-worker
+    spec:
+      containers:
+       - name: fibo-recast-worker
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:fibonacci-workflow-controller
+         imagePullPolicy: Always
+         env:
+          - name: QUEUE_ENV
+            value: "fibo-recast-queue"
+          - name: EXPERIMENT
+            value: "recast"
+          - name: SHARED_VOLUME
+            value: "/k8s/recast"
+         volumeMounts:
+          - name: cap-recast-v
+            mountPath: "/data"
+      securityContext:
+        fsGroup: 0
+      volumes:
+       - name: cap-recast-v
+         cephfs:
+           monitors:
+            - 128.142.36.227:6790
+            - 128.142.39.77:6790
+            - 128.142.39.144:6790
+           path: "/k8s/recast"
+           user: k8s
+           secretRef:
+             name: ceph-secret
+           readOnly: false
