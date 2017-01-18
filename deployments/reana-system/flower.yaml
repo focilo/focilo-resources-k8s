@@ -13,10 +13,10 @@ spec:
        - name: flower
          image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:flower
          ports:
-          - containerPort: 5555 
+          - containerPort: 5555
             name: "http"
          env:
           - name: CELERY_BROKER_URL
-            value: amqp://test:1234@broker-service//
+            value: amqp://test:1234@message-broker//
           - name: FLOWER_BROKER_API
-            value: http://test:1234@broker-service:15672/api/
+            value: http://test:1234@message-broker:15672/api/

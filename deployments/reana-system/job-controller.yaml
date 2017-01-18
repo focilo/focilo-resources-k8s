@@ -11,10 +11,10 @@ spec:
     spec:
       containers:
        - name: job-controller
-         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:job-controller
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:reana-job-controller
          imagePullPolicy: Always
          ports:
-          - containerPort: 5000 
+          - containerPort: 5000
             name: "http"
          volumeMounts:
            - name: svaccount
