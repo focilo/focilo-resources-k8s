@@ -11,9 +11,11 @@ spec:
     spec:
       containers:
        - name: yadage-atlas-worker
-         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:reana-workflow-engine-yadage
+         image: reanahub/reana-workflow-engine-yadage
          imagePullPolicy: Always
          env:
+          - name: ZMQ_PROXY_CONNECT
+            value: tcp://zeromq-msg-proxy.default.svc.cluster.local:8666
           - name: QUEUE_ENV
             value: yadage-atlas-queue
           - name: EXPERIMENT
