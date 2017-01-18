@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: workflow-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: workflow-controller
+    spec:
+      containers:
+       - name: workflow-controller
+         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:reana-workflow-controller
+         ports:
+          - containerPort: 5000
+            name: "http"
+         imagePullPolicy: Always
