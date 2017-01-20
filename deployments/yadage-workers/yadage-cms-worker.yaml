@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: yadage-cms-worker
-         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:yadage-workflow-controller
+         image: reanahub/reana-workflow-engine-yadage
          imagePullPolicy: Always
          env:
           - name: QUEUE_ENV
