@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: workflow-controller
-         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:reana-workflow-controller
+         image: reanahub/reana-workflow-controller
          ports:
           - containerPort: 5000
             name: "http"

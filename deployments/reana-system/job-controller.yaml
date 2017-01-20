@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: job-controller
-         image: gitlab-registry.cern.ch/rodrigdi/cap-reuse:reana-job-controller
+         image: reanahub/reana-job-controller
          imagePullPolicy: Always
          ports:
           - containerPort: 5000

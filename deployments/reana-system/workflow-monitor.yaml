@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
        - name: workflow-monitor
-         image: lukasheinrich/reana-workflow-monitor
+         image: reanahub/reana-workflow-monitor
          imagePullPolicy: Always
          command: ['sh','-c','cd server; python app.py']
          env:
