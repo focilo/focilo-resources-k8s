@@ -18,66 +18,28 @@
 # granted to it by virtue of its status as an Intergovernmental Organization or
 # submit itself to any jurisdiction.
 
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+notifications:
+  email: false
 
-# C extensions
-*.so
+sudo: true
 
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+language: python
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+cache:
+  - pip
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+python:
+  - "3.5"
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*,cover
+before_install:
+  - travis_retry pip install --upgrade pip setuptools py
+  - travis_retry pip install twine wheel coveralls
 
-# Translations
-*.mo
-*.pot
+install:
+  - travis_retry pip install -e .[all]
 
-# Django stuff:
-*.log
+script:
+  - ./run-tests.sh
 
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Vagrant
-.vagrant
-
-# Ceph
-ceph-secret.yaml
+after_success:
+  - coveralls
