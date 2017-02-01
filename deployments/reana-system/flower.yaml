@@ -17,6 +17,6 @@ spec:
             name: "http"
          env:
           - name: CELERY_BROKER_URL
-            value: amqp://test:1234@message-broker//
+            value: amqp://test:1234@message-broker.default.svc.cluster.local//
           - name: FLOWER_BROKER_API
-            value: http://test:1234@message-broker:15672/api/
+            value: http://test:1234@message-broker.default.svc.cluster.local:15672/api/
