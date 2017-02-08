@@ -81,3 +81,6 @@ target/
 
 # Ceph
 ceph-secret.yaml
+
+# Built config
+configuration_manifests

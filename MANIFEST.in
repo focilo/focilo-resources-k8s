@@ -31,3 +31,5 @@ recursive-include deployments *.yaml
 recursive-include namespaces *.yaml
 recursive-include resourcequotas *.yaml
 recursive-include services *.yaml
+recursive-include scripts *.sh
+recursive-include templates *.yaml

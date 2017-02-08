@@ -1,0 +1,111 @@
+---
+# Deployment [local|prod]
+DEPLOYMENT: local
+
+# Docker images
+DOCKER_REGISTRY: reanahub
+JOB_CONTROLLER_IMAGE: reana-job-controller
+WORKFLOW_CONTROLLER_IMAGE: reana-workflow-controller
+WORKFLOW_MONITOR_IMAGE: reana-workflow-monitor
+STORAGE_ADMIN_IMAGE: "centos:7"
+ZERO_MQ_IMAGE: reana-workflow-monitor
+MESSAGE_BROKER_IMAGE: reana-message-broker
+WORKFLOW_ENGINE_YADAGE: reana-workflow-engine-yadage
+
+# Workflow engines
+WORKFLOW_ENGINES:
+  - YADAGE: &yadage
+      NAME: yadage
+      DOCKER_IMAGE: reana-workflow-engine-yadage
+
+# Base system config
+K8S_APISERVER_SECRET: default-token-8p260
+IMAGE_PULL_POLICY: IfNotPresent
+ROOT_SHARED_VOLUME:
+  LOCAL:
+    TYPE: hostpath
+    PATH: "/reana"
+  PROD:
+    TYPE: cephfs
+    MONITORS:
+      - 128.142.36.227:6790
+      - 128.142.39.77:6790
+      - 128.142.39.144:6790
+    PATH: "/reana"
+    USER: k8s
+    SECRET_NAME: ceph-secret
+    READONLY: False
+
+# Workers
+WORKERS:
+ - EXPERIMENT: alice
+   WORKFLOW_ENGINE: *yadage
+   REPLICAS: 1
+   SHARED_VOLUME:
+     LOCAL:
+       TYPE: hostpath
+       PATH: "/reana/alice"
+     PROD:
+       TYPE: cephfs
+       MONITORS:
+         - 128.142.36.227:6790
+         - 128.142.39.77:6790
+         - 128.142.39.144:6790
+       PATH: "/reana/alice"
+       USER: k8s
+       SECRET_NAME: ceph-secret
+       READONLY: false
+
+ - EXPERIMENT: atlas
+   WORKFLOW_ENGINE: *yadage
+   REPLICAS: 1
+   SHARED_VOLUME:
+     LOCAL:
+       TYPE: hostpath
+       PATH: "/reana/atlas"
+     PROD:
+       TYPE: cephfs
+       MONITORS:
+         - 128.142.36.227:6790
+         - 128.142.39.77:6790
+         - 128.142.39.144:6790
+       PATH: "/reana/atlas"
+       USER: k8s
+       SECRET_NAME: ceph-secret
+       READONLY: false
+
+ - EXPERIMENT: cms
+   WORKFLOW_ENGINE: *yadage
+   REPLICAS: 1
+   SHARED_VOLUME:
+     LOCAL:
+       TYPE: hostpath
+       PATH: "/reana/cms"
+     PROD:
+       TYPE: cephfs
+       MONITORS:
+         - 128.142.36.227:6790
+         - 128.142.39.77:6790
+         - 128.142.39.144:6790
+       PATH: "/reana/cms"
+       USER: k8s
+       SECRET_NAME: ceph-secret
+       READONLY: false
+
+ - EXPERIMENT: lhcb
+   WORKFLOW_ENGINE: *yadage
+   REPLICAS: 1
+   SHARED_VOLUME:
+     LOCAL:
+       TYPE: hostpath
+       PATH: "/reana/lhcb"
+     PROD:
+       TYPE: cephfs
+       MONITORS:
+         - 128.142.36.227:6790
+         - 128.142.39.77:6790
+         - 128.142.39.144:6790
+       PATH: "/reana/lhcb"
+       USER: k8s
+       SECRET_NAME: ceph-secret
+       READONLY: false
