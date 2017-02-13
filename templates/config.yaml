@@ -109,3 +109,18 @@ WORKERS:
        USER: k8s
        SECRET_NAME: ceph-secret
        READONLY: false
+
+# Namespaces and resourcequotas
+NAMESPACES:
+  - NAME: alice
+    RESOURCEQUOTA:
+      NUMBER_OF_PODS: 4
+  - NAME: atlas
+    RESOURCEQUOTA:
+      NUMBER_OF_PODS: 4
+  - NAME: cms
+    RESOURCEQUOTA:
+      NUMBER_OF_PODS: 4
+  - NAME: lhcb
+    RESOURCEQUOTA:
+      NUMBER_OF_PODS: 4

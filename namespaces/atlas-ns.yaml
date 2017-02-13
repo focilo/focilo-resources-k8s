@@ -1,7 +1,0 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: atlas   
-  labels:    
-    name: atlas
-

@@ -1,7 +1,0 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: alice   
-  labels:    
-    name: alice
-
