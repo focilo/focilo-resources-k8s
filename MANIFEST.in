@@ -27,9 +27,5 @@ recursive-include docs *.png
 recursive-include docs *.rst
 recursive-include docs *.txt
 recursive-include tests *.py
-recursive-include deployments *.yaml
-recursive-include namespaces *.yaml
-recursive-include resourcequotas *.yaml
-recursive-include services *.yaml
 recursive-include scripts *.sh
-recursive-include templates *.yaml
+recursive-include reana_resources_k8s *.yaml
