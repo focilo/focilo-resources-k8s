@@ -6,7 +6,7 @@ To be able to deploy the REANA system, the Kubernetes configuration must be gene
 .. code-block:: sh
 
    $ python setup.py install
-   $ build-manifests.sh
+   $ reana-resources-k8s build-manifests
 
 Once we have done it, we should be able to see the directory `configuration-manifests` with the following structure:
 
