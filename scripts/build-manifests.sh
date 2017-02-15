@@ -24,12 +24,12 @@ split_file () {
 }
 
 build_manifests () {
-    mkdir -p "$templates_path"/../configuration_manifests/"$1"
+    mkdir -p "$templates_path"/../configuration-manifests/"$1"
     for template_file_path in $templates_path/"$1"/*template.yaml;
     do
         template_file_name=${template_file_path//"$templates_path/"/}
         config_file_name=${template_file_name//-template/}
-        config_file_path="$templates_path/../configuration_manifests/$config_file_name"
+        config_file_path="$templates_path/../configuration-manifests/$config_file_name"
         jinja2 "$template_file_path" "$templates_path/config.yaml" > "$config_file_path"
         sed '/^[[:space:]]*$/d' -i "$config_file_path"
         if [ "$(grep -c '\-\-\-' "$config_file_path")" -gt 1 ];
