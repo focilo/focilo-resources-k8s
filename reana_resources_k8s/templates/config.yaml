@@ -1,9 +1,22 @@
 ---
-# Deployment [local|prod]
+# Deployment:
+# Defines whether the environment created for the system should be
+# `local` or `production`.
+# `local` -> Deployable using `minikube`. Uses the host VM file system
+#            for sharing information between workflow steps. Also uses
+#            local docker images instead of remote ones for speeding
+#            up the development.
+# `prod`  -> Deployable on the CERN OpenStack Kubernetes cluster using
+#            real distributed file system and images from a docker
+#            registry.
 DEPLOYMENT: local
 
-# Docker images
+# Docker registry:
+# Defines the docker registry where images should be grabbed from when
+# prod environment is set.
 DOCKER_REGISTRY: reanahub
+# Docker images:
+# Defines the name of the docker images used by the system.
 JOB_CONTROLLER_IMAGE: reana-job-controller
 WORKFLOW_CONTROLLER_IMAGE: reana-workflow-controller
 WORKFLOW_MONITOR_IMAGE: reana-workflow-monitor
@@ -12,13 +25,15 @@ ZERO_MQ_IMAGE: reana-workflow-monitor
 MESSAGE_BROKER_IMAGE: reana-message-broker
 WORKFLOW_ENGINE_YADAGE: reana-workflow-engine-yadage
 
-# Workflow engines
+# Workflow engines:
+# List which contains all available workflow engines.
 WORKFLOW_ENGINES:
   - YADAGE: &yadage
       NAME: yadage
       DOCKER_IMAGE: reana-workflow-engine-yadage
 
-# Base system config
+# Base system config:
+# Variables used to configure the base system.
 K8S_APISERVER_SECRET: default-token-8p260
 IMAGE_PULL_POLICY: IfNotPresent
 ROOT_SHARED_VOLUME:
@@ -36,7 +51,9 @@ ROOT_SHARED_VOLUME:
     SECRET_NAME: ceph-secret
     READONLY: False
 
-# Workers
+# Workers:
+# List which contains all the kind of workers which are going to be
+# created when loading the output configuration into Kubernetes.
 WORKERS:
  - EXPERIMENT: alice
    WORKFLOW_ENGINE: *yadage
@@ -110,7 +127,9 @@ WORKERS:
        SECRET_NAME: ceph-secret
        READONLY: false
 
-# Namespaces and resourcequotas
+# Namespaces and resourcequotas:
+# List which contains the different namespaces which will be supported
+# by the system along with the resource quotas associated to them.
 NAMESPACES:
   - NAME: alice
     RESOURCEQUOTA:

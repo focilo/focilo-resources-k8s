@@ -6,6 +6,7 @@
 
    introduction
    gettingstarted
+   configuration
    contributing
    changes
    license
