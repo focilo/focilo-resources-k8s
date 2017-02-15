@@ -84,7 +84,7 @@ setup(
     extras_require=extras_require,
     setup_requires=setup_requires,
     tests_require=tests_require,
-    scripts=['scripts/build-manifests.sh'],
+    scripts=['scripts/reana-resources-k8s'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
