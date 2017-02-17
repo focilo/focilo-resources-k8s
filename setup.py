@@ -61,6 +61,11 @@ setup_requires = [
     'pytest-runner>=2.7',
 ]
 
+install_requires = [
+    'jinja2-cli>=0.6.0',
+    'PyYAML>=3.12',
+]
+
 packages = find_packages()
 
 
@@ -82,6 +87,7 @@ setup(
     packages=['reana_resources_k8s', ],
     zip_safe=False,
     extras_require=extras_require,
+    install_requires=install_requires,
     setup_requires=setup_requires,
     tests_require=tests_require,
     scripts=['scripts/reana-resources-k8s'],
