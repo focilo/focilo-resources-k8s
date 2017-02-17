@@ -86,6 +86,7 @@ setup(
     url='https://github.com/reanahub/reana-resources-k8s',
     packages=['reana_resources_k8s', ],
     zip_safe=False,
+    include_package_data=True,
     extras_require=extras_require,
     install_requires=install_requires,
     setup_requires=setup_requires,

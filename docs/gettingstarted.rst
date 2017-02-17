@@ -32,29 +32,30 @@ Second, you can build resource manifests by doing:
 .. code-block:: console
 
    $ reana-resources-k8s build-manifests
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/job-controller.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/message-broker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/storage-admin.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/yadage-alice-worker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/yadage-atlas-worker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/yadage-cms-worker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/yadage-lhcb-worker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/workflow-controller.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/workflow-monitor.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/deployments/zeromq-msg-proxy.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/namespaces/alice.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/namespaces/atlas.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/namespaces/cms.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/namespaces/lhcb.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/resourcequotas/alice-quota.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/resourcequotas/atlas-quota.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/resourcequotas/cms-quota.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/resourcequotas/lhcb-quota.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/services/job-controller.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/services/message-broker.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/services/workflow-controller.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/services/workflow-monitor.yaml
-   Created -> /home/rodrigdi/reanahub-forks/reana-resources-k8s/reana_resources_k8s/templates/../configuration-manifests/services/zeromq-msg-proxy.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/job-controller.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/message-broker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/storage-admin.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/yadage-alice-worker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/yadage-atlas-worker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/yadage-cms-worker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/yadage-lhcb-worker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/workflow-controller.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/workflow-monitor.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/deployments/zeromq-msg-proxy.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/namespaces/alice.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/namespaces/atlas.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/namespaces/cms.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/namespaces/lhcb.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/resourcequotas/alice-quota.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/resourcequotas/atlas-quota.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/resourcequotas/cms-quota.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/resourcequotas/lhcb-quota.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/services/job-controller.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/services/message-broker.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/services/workflow-controller.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/services/workflow-monitor.yaml
+   Created -> /home/reanauser/reana/configuration-manifests/services/zeromq-msg-proxy.yaml
+
 
 Once it is done, a directory called `configuration-manifests` with the following structure should be available:
 

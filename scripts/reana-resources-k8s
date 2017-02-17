@@ -21,28 +21,30 @@
 # submit itself to any jurisdiction.
 
 split_file () {
-    file=$1
-    extension=${file##*.}
-    cd "$(dirname "$file")" || exit
-    csplit -zq "$(basename "$file")" /"$2"/ "{*}"
+    file_path=$1
+    sep=$2
+    extension=${file_path##*.}
+    cd "$(dirname "$file_path")" || exit
+    csplit -zq "$(basename "$file_path")" /"$sep"/ "{*}"
     for old_file_name in xx*
     do
         new_file_name="$(grep 'name' "$old_file_name" | head -1 | cut -d ':' -f 2 | tr -d ' ').$extension"
         mv "$old_file_name" "$new_file_name"
-        echo "Created -> $(dirname "$file")/$new_file_name"
+        echo "Created -> $(dirname "$file_path")/$new_file_name"
     done
-    rm "$config_file_path"
-    cd "$(dirname "$file")" || exit
+    cd "$OLDPWD" || exit
 }
 
 populate_templates () {
-    resource=$1
-    mkdir -p "$templates_path"/../configuration-manifests/"$resource"
+    templates_path=$1
+    resource=$2
+    output_directory="$PWD"/configuration-manifests/"$resource"
+    mkdir -p "$output_directory"
     for template_file_path in $templates_path/"$resource"/*template.yaml
     do
-        template_file_name=$(printf '%s' "$template_file_path" | sed -e "s@$templates_path\/@@g")
+        template_file_name=$(printf '%s' "$template_file_path" | sed -e "s@$templates_path\/$resource\/@@g")
         config_file_name=$(printf '%s' "$template_file_name" | sed -e "s/-template//g")
-        config_file_path="$templates_path/../configuration-manifests/$config_file_name"
+        config_file_path="$output_directory/$config_file_name"
         jinja2 "$template_file_path" "$templates_path/config.yaml" > "$config_file_path"
         sed '/^[[:space:]]*$/d' -i "$config_file_path"
         if [ "$(grep -c '\-\-\-' "$config_file_path")" -gt 1 ]
@@ -65,10 +67,10 @@ print(pkg_resources.resource_filename('reana_resources_k8s', \
     # grab the name of the resources which need to be built
     resources=$(for child in $templates_path/*; do file_name=$(basename "$child"); if [ "$file_name" != "config.yaml" ]; then echo "$file_name"; fi ; done)
 
-    for resource in $resources;
+    for resource in $resources
     do
-        populate_templates "$resource";
-    done;
+        populate_templates "$templates_path" "$resource"
+    done
 }
 
 usage() {
@@ -79,7 +81,7 @@ usage() {
     echo "  -h                 Help"
 }
 
-if [ "$1" != "" ];
+if [ "$1" != "" ]
 then
     case $1 in
         build-manifests )       build_manifests
