@@ -40,6 +40,7 @@ install:
 
 script:
   - ./run-tests.sh
+  - reana-resources-k8s build-manifests
 
 after_success:
   - coveralls
