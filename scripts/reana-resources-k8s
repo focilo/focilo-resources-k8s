@@ -25,13 +25,15 @@ split_file () {
     sep=$2
     extension=${file_path##*.}
     cd "$(dirname "$file_path")" || exit
-    csplit -zq "$(basename "$file_path")" /"$sep"/ "{*}"
+    csplit -ks "$(basename "$file_path")" /"$sep"/ "{$(grep -c -e "$sep" "$(basename "$file_path")")}" 2> /dev/null
+    find . -type f -size 0c -exec rm {} \;
     for old_file_name in xx*
     do
         new_file_name="$(grep 'name' "$old_file_name" | head -1 | cut -d ':' -f 2 | tr -d ' ').$extension"
         mv "$old_file_name" "$new_file_name"
         echo "Created -> $(dirname "$file_path")/$new_file_name"
     done
+    rm "$file_path"
     cd "$OLDPWD" || exit
 }
 
@@ -46,8 +48,8 @@ populate_templates () {
         config_file_name=$(printf '%s' "$template_file_name" | sed -e "s/-template//g")
         config_file_path="$output_directory/$config_file_name"
         jinja2 "$template_file_path" "$templates_path/config.yaml" > "$config_file_path"
-        sed '/^[[:space:]]*$/d' -i "$config_file_path"
-        if [ "$(grep -c '\-\-\-' "$config_file_path")" -gt 1 ]
+        sed -i'' -E '/^[[:space:]]*$/d' "$config_file_path"
+        if [ "$(grep -c -e '---' "$config_file_path")" -gt 1 ]
         then
             split_file "$config_file_path" "---"
         else
