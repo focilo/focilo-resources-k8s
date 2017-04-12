@@ -59,6 +59,7 @@ WORKERS:
    WORKFLOW_ENGINE: *yadage
    REPLICAS: 1
    SHARED_VOLUME:
+     MOUNT_POINT: "/data"
      LOCAL:
        TYPE: hostpath
        PATH: "/reana/alice"
@@ -77,6 +78,7 @@ WORKERS:
    WORKFLOW_ENGINE: *yadage
    REPLICAS: 1
    SHARED_VOLUME:
+     MOUNT_POINT: "/data"
      LOCAL:
        TYPE: hostpath
        PATH: "/reana/atlas"
@@ -95,6 +97,7 @@ WORKERS:
    WORKFLOW_ENGINE: *yadage
    REPLICAS: 1
    SHARED_VOLUME:
+     MOUNT_POINT: "/data"
      LOCAL:
        TYPE: hostpath
        PATH: "/reana/cms"
@@ -113,6 +116,7 @@ WORKERS:
    WORKFLOW_ENGINE: *yadage
    REPLICAS: 1
    SHARED_VOLUME:
+     MOUNT_POINT: "/data"
      LOCAL:
        TYPE: hostpath
        PATH: "/reana/lhcb"

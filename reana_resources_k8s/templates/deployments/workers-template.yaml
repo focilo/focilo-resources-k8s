@@ -1,4 +1,3 @@
-
 {% for worker in WORKERS %}
 ---
 apiVersion: extensions/v1beta1
@@ -24,10 +23,10 @@ spec:
         - name: EXPERIMENT
           value: {{worker.EXPERIMENT}}
         - name: SHARED_VOLUME
-          value: "/reana/{{worker.EXPERIMENT}}"
+          value: {{worker.SHARED_VOLUME.MOUNT_POINT}}
         volumeMounts:
         - name: {{worker.EXPERIMENT}}-shared-volume
-          mountPath: "/data"
+          mountPath: {{worker.SHARED_VOLUME.MOUNT_POINT}}
       volumes:
       - name: {{worker.EXPERIMENT}}-shared-volume
         {% if DEPLOYMENT == 'prod' %}
