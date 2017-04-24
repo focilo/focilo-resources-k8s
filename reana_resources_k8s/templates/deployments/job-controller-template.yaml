@@ -20,6 +20,9 @@ spec:
         volumeMounts:
         - name: svaccount
           mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+        env:
+        - name: REANA_STORAGE_BACKEND
+          value: {% if DEPLOYMENT == 'prod' %}CEPHFS{% else %}LOCAL{% endif %}
       volumes:
       - name: svaccount
         secret:
