@@ -51,10 +51,32 @@ ROOT_SHARED_VOLUME:
     SECRET_NAME: ceph-secret
     READONLY: False
 
+# REANA Workflow Controller configuration
+ORGANIZATIONS: "default,alice,atlas,cms,lhcb"
+
 # Workers:
 # List which contains all the kind of workers which are going to be
 # created when loading the output configuration into Kubernetes.
 WORKERS:
+ - EXPERIMENT: default
+   WORKFLOW_ENGINE: *yadage
+   REPLICAS: 1
+   SHARED_VOLUME:
+     MOUNT_POINT: "/data"
+     LOCAL:
+       TYPE: hostpath
+       PATH: "/reana/default"
+     PROD:
+       TYPE: cephfs
+       MONITORS:
+         - 128.142.36.227:6790
+         - 128.142.39.77:6790
+         - 128.142.39.144:6790
+       PATH: "/reana/default"
+       USER: k8s
+       SECRET_NAME: ceph-secret
+       READONLY: false
+
  - EXPERIMENT: alice
    WORKFLOW_ENGINE: *yadage
    REPLICAS: 1

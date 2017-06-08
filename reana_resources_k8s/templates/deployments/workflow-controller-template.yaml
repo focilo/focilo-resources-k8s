@@ -23,6 +23,8 @@ spec:
         env:
         - name: SHARED_VOLUME_PATH
           value: "/reana"
+        - name: ORGANIZATIONS
+          value: {{ORGANIZATIONS}}
       volumes:
       - name: reana-shared-volume
         {% if DEPLOYMENT == 'prod' %}
