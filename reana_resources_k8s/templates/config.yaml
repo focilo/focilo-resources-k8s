@@ -17,6 +17,7 @@ DEPLOYMENT: local
 DOCKER_REGISTRY: reanahub
 # Docker images:
 # Defines the name of the docker images used by the system.
+SERVER_IMAGE: reana-server
 JOB_CONTROLLER_IMAGE: reana-job-controller
 WORKFLOW_CONTROLLER_IMAGE: reana-workflow-controller
 WORKFLOW_MONITOR_IMAGE: reana-workflow-monitor
