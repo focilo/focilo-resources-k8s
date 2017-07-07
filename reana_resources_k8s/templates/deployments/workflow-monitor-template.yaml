@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: workflow-monitor
-        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{WORKFLOW_MONITOR_IMAGE}}
+        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{WORKFLOW_MONITOR_IMAGE}}{% if IMAGES_VERSION %}:{{IMAGES_VERSION}}{% endif %}
         imagePullPolicy: {{IMAGE_PULL_POLICY}}
         command:
         - sh

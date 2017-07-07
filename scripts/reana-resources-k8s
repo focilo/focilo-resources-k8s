@@ -40,6 +40,7 @@ split_file () {
 populate_templates () {
     templates_path=$1
     resource=$2
+    images_version=$3
     output_directory="$PWD"/configuration-manifests/"$resource"
     mkdir -p "$output_directory"
     for template_file_path in $templates_path/"$resource"/*template.yaml
@@ -47,7 +48,7 @@ populate_templates () {
         template_file_name=$(printf '%s' "$template_file_path" | sed -e "s@$templates_path\/$resource\/@@g")
         config_file_name=$(printf '%s' "$template_file_name" | sed -e "s/-template//g")
         config_file_path="$output_directory/$config_file_name"
-        jinja2 "$template_file_path" "$templates_path/config.yaml" > "$config_file_path"
+        jinja2 "$template_file_path" "$templates_path/config.yaml" -D IMAGES_VERSION="$images_version" > "$config_file_path"
         sed -i'' -E '/^[[:space:]]*$/d' "$config_file_path"
         if [ "$(grep -c -e '---' "$config_file_path")" -gt 1 ]
         then
@@ -60,6 +61,8 @@ populate_templates () {
 
 
 build_manifests () {
+    images_version=$1
+
     # detect pathname for templates directory:
     templates_path=$(echo "from __future__ import print_function; \
 import pkg_resources; \
@@ -71,7 +74,7 @@ print(pkg_resources.resource_filename('reana_resources_k8s', \
 
     for resource in $resources
     do
-        populate_templates "$templates_path" "$resource"
+        populate_templates "$templates_path" "$resource" "$images_version"
     done
 }
 
@@ -79,14 +82,14 @@ usage() {
     echo "${0##*/} manages all Kubernetes configuration for REANA system"
     echo ""
     echo "Usage:"
-    echo "  build-manifests    Generates the manifests for the REANA system"
-    echo "  -h                 Help"
+    echo "  build-manifests [version]  Generates the manifests for the REANA system"
+    echo "  -h                         Help"
 }
 
 if [ "$1" != "" ]
 then
     case $1 in
-        build-manifests )       build_manifests
+        build-manifests )       build_manifests $2
                                 ;;
         -h | --help )           usage
                                 exit

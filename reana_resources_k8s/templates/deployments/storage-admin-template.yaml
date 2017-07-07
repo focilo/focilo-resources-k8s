@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - name: storage-admin
-    image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{STORAGE_ADMIN_IMAGE}}
+    image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{STORAGE_ADMIN_IMAGE}}{% if IMAGES_VERSION %}:{{IMAGES_VERSION}}{% endif %}
     imagePullPolicy: {{IMAGE_PULL_POLICY}}
     volumeMounts:
     - mountPath: "/reana"

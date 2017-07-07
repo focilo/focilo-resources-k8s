@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: {{worker.WORKFLOW_ENGINE.NAME}}-{{worker.EXPERIMENT}}-worker
-        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{worker.WORKFLOW_ENGINE.DOCKER_IMAGE}}
+        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{worker.WORKFLOW_ENGINE.DOCKER_IMAGE}}{% if IMAGES_VERSION %}:{{IMAGES_VERSION}}{% endif %}
         imagePullPolicy: {{IMAGE_PULL_POLICY}}
         env:
         - name: ZMQ_PROXY_CONNECT

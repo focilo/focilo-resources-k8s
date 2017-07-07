@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: job-controller
-        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{JOB_CONTROLLER_IMAGE}}
+        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{JOB_CONTROLLER_IMAGE}}{% if IMAGES_VERSION %}:{{IMAGES_VERSION}}{% endif %}
         imagePullPolicy: {{IMAGE_PULL_POLICY}}
         ports:
         - containerPort: 5000

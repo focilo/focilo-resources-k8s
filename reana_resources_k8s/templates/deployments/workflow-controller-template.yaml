@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: workflow-controller
-        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{WORKFLOW_CONTROLLER_IMAGE}}
+        image: {% if DEPLOYMENT == 'prod' %}{{DOCKER_REGISTRY}}/{% endif %}{{WORKFLOW_CONTROLLER_IMAGE}}{% if IMAGES_VERSION %}:{{IMAGES_VERSION}}{% endif %}
         imagePullPolicy: {{IMAGE_PULL_POLICY}}
         volumeMounts:
         - mountPath: "/reana"
