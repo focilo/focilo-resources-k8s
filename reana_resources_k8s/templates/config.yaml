@@ -21,7 +21,6 @@ SERVER_IMAGE: reana-server
 JOB_CONTROLLER_IMAGE: reana-job-controller
 WORKFLOW_CONTROLLER_IMAGE: reana-workflow-controller
 WORKFLOW_MONITOR_IMAGE: reana-workflow-monitor
-STORAGE_ADMIN_IMAGE: "centos:7"
 ZERO_MQ_IMAGE: reana-workflow-monitor
 MESSAGE_BROKER_IMAGE: reana-message-broker
 WORKFLOW_ENGINE_YADAGE: reana-workflow-engine-yadage
