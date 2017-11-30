@@ -1,0 +1,32 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cwl-default-worker
+spec:
+  replicas:
+  template:
+    metadata:
+      labels:
+        app: cwl-default-worker
+    spec:
+      containers:
+      - name: cwl-default-worker
+        image: reana-workflow-engine-cwl:v0.0.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ZMQ_PROXY_CONNECT
+          value: tcp://zeromq-msg-proxy.default.svc.cluster.local:8666
+        - name: QUEUE_ENV
+          value: cwl-default-queue
+        - name: REANA_WORKFLOW_ENGINE_EXPERIMENT
+          value: default
+        - name: SHARED_VOLUME
+          value: /data
+        volumeMounts:
+        - name: default-shared-volume
+          mountPath: /data
+      volumes:
+      - name: default-shared-volume
+        hostPath:
+            path: /reana/default

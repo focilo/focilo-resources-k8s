@@ -20,7 +20,7 @@ spec:
           value: tcp://zeromq-msg-proxy.default.svc.cluster.local:8666
         - name: QUEUE_ENV
           value: {{worker.WORKFLOW_ENGINE.NAME}}-{{worker.EXPERIMENT}}-queue
-        - name: REANA_WORKFLOW_ENGINE_YADAGE_EXPERIMENT
+        - name: REANA_WORKFLOW_ENGINE_EXPERIMENT
           value: {{worker.EXPERIMENT}}
         - name: SHARED_VOLUME
           value: {{worker.SHARED_VOLUME.MOUNT_POINT}}
